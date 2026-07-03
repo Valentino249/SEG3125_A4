@@ -19,22 +19,25 @@ const Search = () => {
       const query = formData.get("query")
       const selection = formData.get("options")
       console.log(formData.get("options"))
-      alert(`you searched for '${query}' with category '${selection}'`)
+      console.log(String(query))
+      console.log(clothes[3].name.toLowerCase().includes(String(query).toLowerCase()))
 
-      switch (selection) {
-        case 'tops':
-          setFilteredClothes(clothes.filter(cloth => cloth.type === 'tops'))
-          console.log(filteredClothes)
-        case 'pants':
-          setFilteredClothes(clothes.filter(cloth => cloth.type === 'pants'))
-          console.log(filteredClothes)
-        case 'dresses':
-          setFilteredClothes(clothes.filter(cloth => cloth.type === 'dresses'))
-          console.log(filteredClothes)
-        case 'baby':
-          setFilteredClothes(clothes.filter(cloth => cloth.type === 'baby'))
-          console.log(filteredClothes)
-      }
+      setFilteredClothes(clothes.filter(cloth => cloth.type === selection && cloth.name.toLowerCase().includes(String(query).toLowerCase())))
+      // setFilteredClothes(filteredClothes.filter(cloth => cloth.name.toLowerCase().includes(String(query).toLowerCase())))
+      // switch (selection) {
+      //   case 'tops':
+      //     setFilteredClothes(clothes.filter(cloth => cloth.type === 'tops'))
+      //     console.log(filteredClothes)
+      //   case 'pants':
+      //     setFilteredClothes(clothes.filter(cloth => cloth.type === 'pants'))
+      //     console.log(filteredClothes)
+      //   case 'dresses':
+      //     setFilteredClothes(clothes.filter(cloth => cloth.type === 'dresses'))
+      //     console.log(filteredClothes)
+      //   case 'baby':
+      //     setFilteredClothes(clothes.filter(cloth => cloth.type === 'baby'))
+      //     console.log(filteredClothes)
+      // }
 
   }
 
