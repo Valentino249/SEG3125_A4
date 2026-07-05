@@ -77,6 +77,7 @@ const Feedback = ({ onNavigate }: FeedbackProps) => {
 
             className="btn w-full"
             type="submit"
+            onClick={() => alert("Your feedback has been submitted!")}
           >
             Submit Form
           </button>
