@@ -1,6 +1,49 @@
 import { useState } from "react";
+import CL1 from "../assets/baby.jpg"
+import CL2 from "../assets/blue_button_shirt.jpg"
+import CL3 from "../assets/blue_dress.jpg"
+import CL4 from "../assets/camo_pants.jpg"
+
+interface Item {
+  name: string;
+  price: number;
+  color: string;
+  type: string;
+  image: string;
+}
 
 const Search = () => {
+
+  const items: Item[] = [
+  {
+    name: "Baby Overalls",
+    price: 50,
+    color: "Orange",
+    type: "baby",
+    image: CL1,
+  },
+  {
+    name: "Blue Buttoned Shirt",
+    price: 25,
+    color: "Blue",
+    type: "tops",
+    image: CL2,
+  },
+  {
+    name: "Blue Dress",
+    price: 70,
+    color: "Blue",
+    type: "dresses",
+    image: CL3,
+  },
+  {
+    name: "Camo-Pants",
+    price: 50,
+    color: "Brown",
+    type: "pants",
+    image: CL4,
+  },
+];
 
   const clothes = [
     { name: "T-Shirt", price: 20, color: "Black", type: "tops" },
@@ -11,6 +54,8 @@ const Search = () => {
   
   let [filteredClothes, setFilteredClothes] = useState(clothes)
 
+  let [filteredItems, setFilteredItems] = useState(items)
+
   const handleSubmit = (e:any) => {
       e.preventDefault()
       //modify filteredclothes
@@ -20,25 +65,12 @@ const Search = () => {
       const selection = formData.get("options")
       console.log(formData.get("options"))
       console.log(String(query))
-      console.log(clothes[3].name.toLowerCase().includes(String(query).toLowerCase()))
 
-      setFilteredClothes(clothes.filter(cloth => cloth.type === selection && cloth.name.toLowerCase().includes(String(query).toLowerCase())))
-      // setFilteredClothes(filteredClothes.filter(cloth => cloth.name.toLowerCase().includes(String(query).toLowerCase())))
-      // switch (selection) {
-      //   case 'tops':
-      //     setFilteredClothes(clothes.filter(cloth => cloth.type === 'tops'))
-      //     console.log(filteredClothes)
-      //   case 'pants':
-      //     setFilteredClothes(clothes.filter(cloth => cloth.type === 'pants'))
-      //     console.log(filteredClothes)
-      //   case 'dresses':
-      //     setFilteredClothes(clothes.filter(cloth => cloth.type === 'dresses'))
-      //     console.log(filteredClothes)
-      //   case 'baby':
-      //     setFilteredClothes(clothes.filter(cloth => cloth.type === 'baby'))
-      //     console.log(filteredClothes)
-      // }
-
+      if (selection === "none"){
+        setFilteredItems(items.filter(cloth => cloth.name.toLowerCase().includes(String(query).toLowerCase())))
+      }else {
+        setFilteredItems(items.filter(cloth => cloth.type === selection && cloth.name.toLowerCase().includes(String(query).toLowerCase())))
+      }
   }
 
 
@@ -50,6 +82,7 @@ const Search = () => {
       
       <form onSubmit={handleSubmit} className="text-center  text-black">
         <select name="options" id="options">
+          <option value="none">None</option>
           <option value="tops">Tops</option>
           <option value="pants">Pants</option>
           <option value="dresses">Dresses</option>
@@ -60,7 +93,7 @@ const Search = () => {
       </form>
 
 
-      <div style={{display: 'flex', gap: '1rem'}}>
+      {/* <div style={{display: 'flex', gap: '1rem'}}>
         {filteredClothes.map((item: any, index: any) => (
             <div
                 key={index}
@@ -77,7 +110,30 @@ const Search = () => {
                 <p>Price: ${item.price}</p>
             </div>
         ))}
+      </div> */}
+
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {filteredItems.map((item, index) => (
+    <div
+      key={index}
+      className="rounded-lg border shadow bg-white overflow-hidden"
+    >
+      <img
+        src={item.image}
+        alt={item.name}
+        className="w-full h-64 object-cover"
+      />
+
+      <div className="p-4">
+        <h2 className="text-xl font-bold">{item.name}</h2>
+        <p>CA ${item.price}</p>
+        <p>{item.color}</p>
       </div>
+    </div>
+  ))}
+</div>
+
+
     </div>
   );
 };
