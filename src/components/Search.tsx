@@ -186,7 +186,7 @@ const Search = ({ onNavigate }: SearchProps) => {
 
 
   return (
-    <div className="mb-3 mt-3">
+    <div className="mb-3 mt-3 min-h-screen">
       <h1 className="mb-3 text-center text-5xl font-bold text-black">
         Search Products
       </h1>
@@ -208,6 +208,13 @@ const Search = ({ onNavigate }: SearchProps) => {
         <p className="text-center mb-1">{item.name} ${item.price}</p><button className="btn" onClick={() => handleRemove(index)}>Remove</button>
       </div>
     ))}
+
+    {filteredItems.length === 0 && 
+    <div>
+      <h3 className="mb-3 text-center text-3xl font-bold text-black">
+        No results found. Try changing your search!
+      </h3>
+      </div>}
 
     {!(cartItems.length === 0) && 
     <div className="flex gap-2 items-center justify-center mb-3">
