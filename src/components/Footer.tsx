@@ -12,11 +12,11 @@ const Footer = ({ onNavigate }: FooterProps) => {
           items-center justify-center
           gap-4 md:gap-10
           text-sm">
-          <button onClick={() => onNavigate("home")}>
+          <button onClick={() => onNavigate("home")} className="header">
           Home
         </button>
 
-        <button onClick={() => onNavigate("search")}>
+        <button onClick={() => onNavigate("search")} className="header">
           Search Products
         </button>
 

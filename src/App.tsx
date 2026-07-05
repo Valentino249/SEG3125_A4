@@ -20,7 +20,7 @@ function App() {
 
       <Header onNavigate={setCurrentPage} />
 
-      {currentPage === "home" && <Hero />}
+      {currentPage === "home" && <Hero onNavigate={setCurrentPage} />}
       {currentPage === "search" && <Search onNavigate={setCurrentPage}/> }
       {currentPage === "checkout" && <Checkout onNavigate={setCurrentPage}/>}
       {currentPage === "feedback" && <Feedback onNavigate={setCurrentPage}/>}
