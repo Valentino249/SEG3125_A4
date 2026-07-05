@@ -16,16 +16,8 @@ const Footer = ({ onNavigate }: FooterProps) => {
           Home
         </button>
 
-        <button onClick={() => onNavigate("concept_art")}>
-          Women
-        </button>
-
-        <button onClick={() => onNavigate("portraiture")}>
-          Men
-        </button>
-
-        <button onClick={() => onNavigate("contact")}>
-          Kids
+        <button onClick={() => onNavigate("search")}>
+          Search Products
         </button>
 
         </div>

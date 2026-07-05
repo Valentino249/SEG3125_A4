@@ -12,6 +12,10 @@
   cursor: pointer;
   border-radius: 12px;
 }
+
+.btn:hover {
+  background-color: rgb(181, 0, 24);
+}
 /* 
 :root {
   --text: #6b6375;

@@ -3,6 +3,19 @@ import CL1 from "../assets/baby.jpg"
 import CL2 from "../assets/blue_button_shirt.jpg"
 import CL3 from "../assets/blue_dress.jpg"
 import CL4 from "../assets/camo_pants.jpg"
+import CL5 from "../assets/dark_blue_button_shirt.jpg"
+import CL6 from "../assets/denim_jacket.jpg"
+import CL7 from "../assets/jeans_1.jpg"
+import CL8 from "../assets/knitted_sweater.jpg"
+import CL9 from "../assets/light_blue_b_s.jpg"
+import CL10 from "../assets/pink_dress.jpg"
+import CL11 from "../assets/pink_pants.jpg"
+import CL12 from "../assets/purple_pants.jpg"
+import CL13 from "../assets/red_sweater.jpg"
+import CL14 from "../assets/trenchcoat.jpg"
+import CL15 from "../assets/white_button_shirt.jpg"
+import CL16 from "../assets/white_t.jpg"
+import CL17 from "../assets/white_top.jpg"
 
 interface Item {
   name: string;
@@ -23,9 +36,9 @@ const Search = () => {
     image: CL1,
   },
   {
-    name: "Blue Buttoned Shirt",
+    name: "Gray Buttoned Shirt",
     price: 25,
-    color: "Blue",
+    color: "Gray",
     type: "tops",
     image: CL2,
   },
@@ -43,18 +56,101 @@ const Search = () => {
     type: "pants",
     image: CL4,
   },
+  {
+    name: "Dark Blue Buttoned Shirt",
+    price: 20,
+    color: "Blue",
+    type: "tops",
+    image: CL5,
+  },
+  {
+    name: "Blue Buttoned Shirt",
+    price: 40,
+    color: "Blue",
+    type: "tops",
+    image: CL6,
+  },
+  {
+    name: "Jeans",
+    price: 50,
+    color: "Blue",
+    type: "pants",
+    image: CL7,
+  },
+  {
+    name: "Knitted Sweater",
+    price: 20,
+    color: "Pink",
+    type: "tops",
+    image: CL8,
+  },
+  {
+    name: "Light Blue Buttoned Shirt",
+    price: 20,
+    color: "Blue",
+    type: "tops",
+    image: CL9,
+  },
+  {
+    name: "Pink Dress",
+    price: 50,
+    color: "Pink",
+    type: "dresses",
+    image: CL10,
+  },
+  {
+    name: "Pink Pants",
+    price: 40,
+    color: "Pink",
+    type: "pants",
+    image: CL11,
+  },
+  {
+    name: "Purple Pants",
+    price: 50,
+    color: "Purple",
+    type: "pants",
+    image: CL12,
+  },
+  {
+    name: "Red Sweater",
+    price: 50,
+    color: "Red",
+    type: "tops",
+    image: CL13,
+  },
+  {
+    name: "Trenchcoat",
+    price: 100,
+    color: "Beige",
+    type: "tops",
+    image: CL14,
+  },
+  {
+    name: "White Buttoned Shirt",
+    price: 20,
+    color: "White",
+    type: "tops",
+    image: CL15,
+  },
+  {
+    name: "White Tee",
+    price: 10,
+    color: "White",
+    type: "tops",
+    image: CL16,
+  },
+  {
+    name: "White Top",
+    price: 20,
+    color: "White",
+    type: "tops",
+    image: CL17,
+  },
 ];
 
-  const clothes = [
-    { name: "T-Shirt", price: 20, color: "Black", type: "tops" },
-    { name: "Jeans", price: 50, color: "Blue", type: "pants" },
-    { name: "Dress", price: 70, color: "Red", type: "dresses" },
-    { name: "Pants", price: 40, color: "Red", type: "pants" },
-  ];
-  
-  let [filteredClothes, setFilteredClothes] = useState(clothes)
-
   let [filteredItems, setFilteredItems] = useState(items)
+  let [cartItems, setCartItems] = useState<Item[]>([])
 
   const handleSubmit = (e:any) => {
       e.preventDefault()
@@ -73,14 +169,25 @@ const Search = () => {
       }
   }
 
+  const handleClick = (item:any) => {
+    console.log(item)
+    setCartItems(cartItems => [...cartItems, item])
+  }
+
+  const handleRemove = (indexOfItem: number) => {
+    setCartItems(cartItems => 
+    cartItems.filter((_, index) => index !== indexOfItem)
+  );
+  }
+
 
   return (
-    <div className="h-screen">
-      <h1 className="text-center text-5xl font-bold text-black">
+    <div className="mb-3 mt-3">
+      <h1 className="mb-3 text-center text-5xl font-bold text-black">
         Search Products
       </h1>
       
-      <form onSubmit={handleSubmit} className="text-center  text-black">
+      <form onSubmit={handleSubmit} className="flex justify-center items-center gap-2 mb-3 text-black">
         <select name="options" id="options">
           <option value="none">None</option>
           <option value="tops">Tops</option>
@@ -91,28 +198,14 @@ const Search = () => {
         <input name="query" className=" border-2"></input>
         <button type="submit" className="btn">Search</button>
       </form>
-
-
-      {/* <div style={{display: 'flex', gap: '1rem'}}>
-        {filteredClothes.map((item: any, index: any) => (
-            <div
-                key={index}
-                style={{
-                    border: '1px solid #ccc',
-                    borderRadius: '8px',
-                    padding: '1rem',
-                    width: '150px',
-                    boxShadow: '2px 2px 6px rgba(0,0,0,0.1)'
-                }}
-            >
-                <h3>{item.name}</h3>
-                <p>Color: {item.color}</p>
-                <p>Price: ${item.price}</p>
-            </div>
-        ))}
-      </div> */}
-
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div className="cart-items">
+    {cartItems.map((item: any, index) => (
+      <div className="flex gap-2 items-center justify-center mb-3">
+        <p className="text-center mb-1">{item.name} ${item.price}</p><button className="btn" onClick={() => handleRemove(index)}>Remove</button>
+      </div>
+    ))}
+  </div>
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
   {filteredItems.map((item, index) => (
     <div
       key={index}
@@ -128,6 +221,7 @@ const Search = () => {
         <h2 className="text-xl font-bold">{item.name}</h2>
         <p>CA ${item.price}</p>
         <p>{item.color}</p>
+        <button className="btn mt-2" onClick={() => handleClick(item)}>Add Item to Cart +</button>
       </div>
     </div>
   ))}
