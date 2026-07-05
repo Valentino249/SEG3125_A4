@@ -25,7 +25,11 @@ interface Item {
   image: string;
 }
 
-const Search = () => {
+interface SearchProps {
+  onNavigate: (page: string) => void;
+}
+
+const Search = ({ onNavigate }: SearchProps) => {
 
   const items: Item[] = [
   {
@@ -200,10 +204,15 @@ const Search = () => {
       </form>
   <div className="cart-items">
     {cartItems.map((item: any, index) => (
-      <div className="flex gap-2 items-center justify-center mb-3">
+      <div className="flex gap-2 items-center justify-center mb-1">
         <p className="text-center mb-1">{item.name} ${item.price}</p><button className="btn" onClick={() => handleRemove(index)}>Remove</button>
       </div>
     ))}
+
+    {!(cartItems.length === 0) && 
+    <div className="flex gap-2 items-center justify-center mb-3">
+      <button className="btn" onClick={() => onNavigate("checkout")}>Checkout</button>
+      </div>}
   </div>
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
   {filteredItems.map((item, index) => (
